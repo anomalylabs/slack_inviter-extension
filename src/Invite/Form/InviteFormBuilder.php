@@ -38,4 +38,13 @@ class InviteFormBuilder extends FormBuilder
         ]
     ];
 
+    /**
+     * The form options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'success_message' => false
+    ];
+
 }

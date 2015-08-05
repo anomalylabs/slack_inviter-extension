@@ -2,6 +2,7 @@
 
 use Anomaly\SlackInviterExtension\Invite\Command\SendInvite;
 use Anomaly\Streams\Platform\Message\MessageBag;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\SlackInviterExtension\Invite\Form
  */
-class InviteFormHandler
+class InviteFormHandler implements SelfHandling
 {
 
     use DispatchesJobs;
@@ -30,9 +31,11 @@ class InviteFormHandler
             return;
         }
 
-        $this->dispatch(new SendInvite($builder));
-
-        $messages->success('Your invitation has been sent!');
+        if ($this->dispatch(new SendInvite($builder))) {
+            $messages->success('anomaly.extension.slack_inviter::success.send_invite');
+        } else {
+            $messages->error('anomaly.extension.slack_inviter::error.send_invite');
+        }
 
         // Clear the form!
         $builder->resetForm();

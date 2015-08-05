@@ -1,8 +1,10 @@
 <?php namespace Anomaly\SlackInviterExtension\Invite\Command;
 
+use Anomaly\SlackInviterExtension\Invite\Event\SlackInviteWasSent;
 use Anomaly\SlackInviterExtension\Invite\Form\InviteFormBuilder;
 use Anomaly\SlackInviterExtension\Invite\InviteModel;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 
 /**
@@ -41,10 +43,11 @@ class SendInvite implements SelfHandling
      *
      * @param InviteModel $invites
      * @param Request     $request
+     * @param Dispatcher  $events
      */
-    public function handle(InviteModel $invites, Request $request)
+    public function handle(InviteModel $invites, Request $request, Dispatcher $events)
     {
-        $user['ip'] = $request->ip();
+        $user['ip_address'] = $request->ip();
 
         // Slack configurations
         $slackAuthToken        = config('anomaly.extension.slack_inviter::slack.auth_token');
@@ -54,11 +57,11 @@ class SendInvite implements SelfHandling
         $slackInviteUrl = 'https://' . $slackHostName . '.slack.com/api/users.admin.invite?t=' . time();
 
         $fields = array(
-            'email'      => urlencode($user['email'] = $this->builder->getFormValue('email')),
-            'first_name' => urlencode($user['name'] = $this->builder->getFormValue('name')),
-            'channels'   => urlencode($slackAutoJoinChannels),
-            'set_active' => urlencode('true'),
+            'email'      => $user['email'] = $this->builder->getFormValue('email'),
+            'first_name' => $user['name'] = $this->builder->getFormValue('name'),
+            'channels'   => $slackAutoJoinChannels,
             'token'      => $slackAuthToken,
+            'set_active' => true,
             '_attempts'  => '1'
         );
 
@@ -83,6 +86,8 @@ class SendInvite implements SelfHandling
         // Close the connection.
         curl_close($ch);
 
-        $invites->create($user);
+        $events->fire(new SlackInviteWasSent($invites->create($user)));
+
+        return $reply['ok'] !== false;
     }
 }
