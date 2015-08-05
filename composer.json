@@ -22,6 +22,12 @@
             "email": "brennon.loveless@gmail.com",
             "homepage": "http://anomaly.is/",
             "role": "Developer"
+        },
+        {
+            "name": "Ryan Thompson",
+            "email": "ryan@pyrocms.com",
+            "homepage": "http://pyrocms.com/",
+            "role": "Developer"
         }
     ],
     "support": {
