@@ -39,6 +39,15 @@ class InviteFormBuilder extends FormBuilder
     ];
 
     /**
+     * The form actions.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'submit'
+    ];
+
+    /**
      * The form options.
      *
      * @var array
