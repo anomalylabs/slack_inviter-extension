@@ -16,6 +16,11 @@ use Illuminate\Contracts\Bus\SelfHandling;
  */
 class ProcessInvites implements SelfHandling
 {
+    /**
+     * Get the users from type form and invite them to slack
+     *
+     * @param InviteModel $invites
+     */
     public function handle(InviteModel $invites)
     {
         $usersToInvite = $this->getTypeFormResponses($invites);
@@ -23,6 +28,12 @@ class ProcessInvites implements SelfHandling
         $this->inviteUsersToSlack($invites, $usersToInvite);
     }
 
+    /**
+     * Get all the users from the type form, form
+     *
+     * @param InviteModel $invites
+     * @return array
+     */
     private function getTypeFormResponses(InviteModel $invites)
     {
         // Type form configurations
@@ -61,6 +72,12 @@ class ProcessInvites implements SelfHandling
         return $usersToInvite;
     }
 
+    /**
+     * Send the users off to slack to be invited
+     *
+     * @param InviteModel $invites
+     * @param             $usersToInvite
+     */
     private function inviteUsersToSlack(InviteModel $invites, $usersToInvite)
     {
         // Slack configurations

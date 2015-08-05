@@ -4,6 +4,13 @@ use Anomaly\SlackInviterExtension\Invite\Command\ProcessInvites;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+/**
+ * Add this process to artisan
+ *
+ * @link          http://www.pyrocms.com
+ * @author        Brennon Loveless <brennon.loveless@gmail.com>
+ * @package       Anomaly\SlackInviterExtension\Invite\Console
+ */
 class Process extends Command
 {
     use DispatchesJobs;
