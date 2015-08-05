@@ -1,6 +1,5 @@
 <?php namespace Anomaly\SlackInviterExtension;
 
-use Anomaly\SlackInviterExtension\Invite\Command\ProcessInvites;
 use Anomaly\SlackInviterExtension\Invite\Console\Process;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
@@ -13,21 +12,14 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  */
 class SlackInviterExtensionServiceProvider extends AddonServiceProvider
 {
-    /**
-     * Add the process invites class to the scheduler
-     *
-     * @var array
-     */
-    protected $schedules = [
-        ProcessInvites::class => '10/* * * * *'
-    ];
 
     /**
-     * Add the process class to artisan
+     * The provided plugins.
      *
      * @var array
      */
-    protected $commands = [
-        'slack:process' => Process::class
+    protected $plugins = [
+        SlackInviterExtensionPlugin::class
     ];
+
 }

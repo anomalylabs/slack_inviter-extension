@@ -11,6 +11,33 @@ use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
  */
 class SlackInviterExtensionPlugin extends Plugin
 {
-    // Should return '<iframe src="https://pyrocms.typeform.com/to/' . config('anomaly.extension.slack_inviter-extension::type_form.form_id') . '"></iframe>';
 
+    /**
+     * The plugin functions.
+     *
+     * @var SlackInviterExtensionPluginFunctions
+     */
+    protected $functions;
+
+    /**
+     * Create a new SlackInviterExtensionPlugin instance.
+     *
+     * @param SlackInviterExtensionPluginFunctions $functions
+     */
+    public function __construct(SlackInviterExtensionPluginFunctions $functions)
+    {
+        $this->functions = $functions;
+    }
+
+    /**
+     * Get the plugin functions.
+     *
+     * @return array
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('slack_invite_form', [$this->functions, 'form'])
+        ];
+    }
 }

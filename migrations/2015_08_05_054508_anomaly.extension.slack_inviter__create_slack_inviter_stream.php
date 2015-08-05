@@ -1,10 +1,17 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
+/**
+ * Class AnomalyExtensionSlackInviterCreateSlackInviterStream
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ */
 class AnomalyExtensionSlackInviterCreateSlackInviterStream extends Migration
 {
+
     /**
      * The stream definition.
      *
@@ -20,9 +27,15 @@ class AnomalyExtensionSlackInviterCreateSlackInviterStream extends Migration
      * @var array
      */
     protected $assignments = [
-        'type_form_id',
-        'email',
-        'name',
-        'status'
+        'email' => [
+            'required' => true
+        ],
+        'name'  => [
+            'required' => true
+        ],
+        'error',
+        'successful',
+        'ip_address'
     ];
+
 }

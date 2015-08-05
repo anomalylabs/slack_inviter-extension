@@ -1,7 +1,41 @@
 {
+    "name": "anomaly/slack_inviter-extension",
+    "type": "streams-addon",
+    "description": "An extension that provides automatic Slack invites.",
+    "keywords": [
+        "streams extension",
+        "streams addon",
+        "extension",
+        "slack"
+    ],
+    "homepage": "http://anomaly.is/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "AnomalyLabs, Inc.",
+            "email": "hello@anomaly.is",
+            "homepage": "http://anomaly.is/",
+            "role": "Owner"
+        },
+        {
+            "name": "Brennon Loveless",
+            "email": "brennon.loveless@gmail.com",
+            "homepage": "http://anomaly.is/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@anomaly.is"
+    },
     "autoload": {
         "psr-4": {
             "Anomaly\\SlackInviterExtension\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.0/master": "1.0.x-dev"
+        }
     }
 }
+
