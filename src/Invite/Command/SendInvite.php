@@ -44,6 +44,7 @@ class SendInvite implements SelfHandling
      * @param InviteModel $invites
      * @param Request     $request
      * @param Dispatcher  $events
+     * @return array
      */
     public function handle(InviteModel $invites, Request $request, Dispatcher $events)
     {
@@ -58,7 +59,7 @@ class SendInvite implements SelfHandling
 
         $fields = array(
             'email'      => $user['email'] = $this->builder->getFormValue('email'),
-            'first_name' => $user['name'] = $this->builder->getFormValue('name'),
+            'first_name' => urlencode($user['name'] = $this->builder->getFormValue('name')),
             'channels'   => $slackAutoJoinChannels,
             'token'      => $slackAuthToken,
             'set_active' => true,
@@ -78,7 +79,7 @@ class SendInvite implements SelfHandling
         $reply = json_decode(curl_exec($ch), true);
 
         if ($reply['ok'] == false) {
-            $user['error'] = 'Error: ' . $reply['error'];
+            $user['error'] = $reply['error'];
         } else {
             $user['successful'] = true;
         }
@@ -88,6 +89,6 @@ class SendInvite implements SelfHandling
 
         $events->fire(new SlackInviteWasSent($invites->create($user)));
 
-        return $reply['ok'] !== false;
+        return $reply;
     }
 }

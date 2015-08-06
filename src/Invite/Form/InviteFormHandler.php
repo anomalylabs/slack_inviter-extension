@@ -31,10 +31,13 @@ class InviteFormHandler implements SelfHandling
             return;
         }
 
-        if ($this->dispatch(new SendInvite($builder))) {
+        $reply = $this->dispatch(new SendInvite($builder));
+
+        if (array_get($reply, 'ok') === true) {
             $messages->success('anomaly.extension.slack_inviter::success.send_invite');
         } else {
             $messages->error('anomaly.extension.slack_inviter::error.send_invite');
+            $messages->error('anomaly.extension.slack_inviter::error.' . $reply['error']);
         }
 
         // Clear the form!
