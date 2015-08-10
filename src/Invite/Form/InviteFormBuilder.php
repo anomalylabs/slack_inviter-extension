@@ -26,16 +26,8 @@ class InviteFormBuilder extends FormBuilder
      * @var array
      */
     protected $fields = [
-        'name'  => [
-            'name'     => 'anomaly.extension.slack_inviter::field.name.name',
-            'type'     => 'anomaly.field_type.name',
-            'required' => true
-        ],
-        'email' => [
-            'name'     => 'anomaly.extension.slack_inviter::field.email.name',
-            'type'     => 'anomaly.field_type.email',
-            'required' => true
-        ]
+        'name',
+        'email'
     ];
 
     /**

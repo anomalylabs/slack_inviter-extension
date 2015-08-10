@@ -37,7 +37,7 @@ class SlackInviterExtensionPlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('slack_invite_form', [$this->functions, 'form'])
+            new \Twig_SimpleFunction('slack_invite_form', [$this->functions, 'form'], ['is_safe' => ['html']])
         ];
     }
 }
