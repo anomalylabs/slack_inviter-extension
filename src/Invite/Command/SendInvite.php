@@ -51,17 +51,23 @@ class SendInvite implements SelfHandling
         $user['ip_address'] = $request->ip();
 
         // Slack configurations
-        $slackAuthToken        = config('anomaly.extension.slack_inviter::slack.auth_token');
-        $slackHostName         = config('anomaly.extension.slack_inviter::slack.host_name');
-        $slackAutoJoinChannels = config('anomaly.extension.slack_inviter::slack.auto_join_channels');
+        $slackTeam     = config('anomaly.extension.slack_inviter::slack.team');
+        $slackToken    = config('anomaly.extension.slack_inviter::slack.token');
+        $slackChannels = config('anomaly.extension.slack_inviter::slack.channels');
 
-        $slackInviteUrl = 'https://' . $slackHostName . '.slack.com/api/users.admin.invite?t=' . time();
+        if (!$slackToken) {
+            throw new \Exception(
+                "Slack API has not been configured. Missing 'anomaly.extension.slack_inviter::slack.auth_token'"
+            );
+        }
+
+        $slackInviteUrl = 'https://' . $slackTeam . '.slack.com/api/users.admin.invite?t=' . time();
 
         $fields = array(
             'email'      => $user['email'] = $this->builder->getFormValue('email'),
             'first_name' => urlencode($user['name'] = $this->builder->getFormValue('name')),
-            'channels'   => $slackAutoJoinChannels,
-            'token'      => $slackAuthToken,
+            'channels'   => $slackChannels,
+            'token'      => $slackToken,
             'set_active' => true,
             '_attempts'  => '1'
         );
