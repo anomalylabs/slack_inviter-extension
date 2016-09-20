@@ -3,7 +3,6 @@
 use Anomaly\SlackInviterExtension\Invite\Event\SlackInviteWasSent;
 use Anomaly\SlackInviterExtension\Invite\Form\InviteFormBuilder;
 use Anomaly\SlackInviterExtension\Invite\InviteModel;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ use Illuminate\Http\Request;
  * @author        Brennon Loveless <brennon.loveless@gmail.com>
  * @package       Anomaly\SlackInviterExtension\Invite\Command
  */
-class SendInvite implements SelfHandling
+class SendInvite
 {
 
     /**
@@ -42,8 +41,8 @@ class SendInvite implements SelfHandling
      * Handle the command.
      *
      * @param InviteModel $invites
-     * @param Request     $request
-     * @param Dispatcher  $events
+     * @param Request $request
+     * @param Dispatcher $events
      * @return array
      */
     public function handle(InviteModel $invites, Request $request, Dispatcher $events)
@@ -63,7 +62,7 @@ class SendInvite implements SelfHandling
             'channels'   => $slackAutoJoinChannels,
             'token'      => $slackAuthToken,
             'set_active' => true,
-            '_attempts'  => '1'
+            '_attempts'  => '1',
         );
 
         // Open the connection.

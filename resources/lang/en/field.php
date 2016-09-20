@@ -2,9 +2,9 @@
 
 return [
     'name'  => [
-        'name' => 'Name'
+        'name' => 'Name',
     ],
     'email' => [
-        'name' => 'Email'
-    ]
+        'name' => 'Email',
+    ],
 ];

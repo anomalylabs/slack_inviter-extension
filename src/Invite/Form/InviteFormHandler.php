@@ -2,7 +2,6 @@
 
 use Anomaly\SlackInviterExtension\Invite\Command\SendInvite;
 use Anomaly\Streams\Platform\Message\MessageBag;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -13,7 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\SlackInviterExtension\Invite\Form
  */
-class InviteFormHandler implements SelfHandling
+class InviteFormHandler
 {
 
     use DispatchesJobs;
@@ -22,7 +21,7 @@ class InviteFormHandler implements SelfHandling
      * Handle the command.
      *
      * @param InviteFormBuilder $builder
-     * @param MessageBag        $messages
+     * @param MessageBag $messages
      */
     public function handle(InviteFormBuilder $builder, MessageBag $messages)
     {

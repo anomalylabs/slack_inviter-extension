@@ -22,7 +22,7 @@ class AnomalyExtensionSlackInviterCreateSlackInviterFields extends Migration
         'name'       => 'anomaly.field_type.text',
         'error'      => 'anomaly.field_type.text',
         'successful' => 'anomaly.field_type.boolean',
-        'ip_address' => 'anomaly.field_type.text'
+        'ip_address' => 'anomaly.field_type.text',
     ];
 
 }

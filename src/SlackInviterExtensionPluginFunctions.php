@@ -24,7 +24,7 @@ class SlackInviterExtensionPluginFunctions
     /**
      * Create a new SlackInviterExtensionPluginFunctions instance.
      *
-     * @param Hydrator  $hydrator
+     * @param Hydrator $hydrator
      * @param Container $container
      */
     function __construct(Hydrator $hydrator, Container $container)

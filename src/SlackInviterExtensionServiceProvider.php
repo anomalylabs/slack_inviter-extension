@@ -19,7 +19,7 @@ class SlackInviterExtensionServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        SlackInviterExtensionPlugin::class
+        SlackInviterExtensionPlugin::class,
     ];
 
 }

@@ -18,7 +18,7 @@ class AnomalyExtensionSlackInviterCreateSlackInviterStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug' => 'invites'
+        'slug' => 'invites',
     ];
 
     /**
@@ -28,14 +28,14 @@ class AnomalyExtensionSlackInviterCreateSlackInviterStream extends Migration
      */
     protected $assignments = [
         'email' => [
-            'required' => true
+            'required' => true,
         ],
         'name'  => [
-            'required' => true
+            'required' => true,
         ],
         'error',
         'successful',
-        'ip_address'
+        'ip_address',
     ];
 
 }

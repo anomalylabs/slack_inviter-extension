@@ -27,7 +27,7 @@ class InviteFormBuilder extends FormBuilder
      */
     protected $fields = [
         'name',
-        'email'
+        'email',
     ];
 
     /**
@@ -36,7 +36,7 @@ class InviteFormBuilder extends FormBuilder
      * @var array
      */
     protected $actions = [
-        'submit'
+        'submit',
     ];
 
     /**
@@ -45,7 +45,7 @@ class InviteFormBuilder extends FormBuilder
      * @var array
      */
     protected $options = [
-        'success_message' => false
+        'success_message' => false,
     ];
 
 }
