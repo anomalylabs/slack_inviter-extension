@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'host_name'          => null,
-    'auto_join_channels' => null,
-    'auth_token'         => null
+    'team'     => env('SLACK_TEAM'),
+    'token'    => env('SLACK_TOKEN'),
+    'channels' => env('SLACK_CHANNELS')
 ];
